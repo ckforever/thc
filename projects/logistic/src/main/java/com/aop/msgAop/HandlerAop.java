@@ -50,11 +50,12 @@ public class HandlerAop {
             if(se.isOpen()){
                 se.send(red.toString());
             }else{
-                System.out.println("???");
+                System.out.println("???++++++>>>");
                 SessionContainer.remove(se.getId());
             }
         });
     }
+
 
     @AfterThrowing(value="any(json,session)",argNames = "json,session,ex",throwing = "ex")
     public void handlerException(JSONObject json,Session session,Throwable ex){
