@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>部门</title>
+<link rel="stylesheet" href="dept.css"/>
+<body>
+<section class="boxV" id="deptContainer">
+    <div class="col-1 boxH">
+        <div class="col-2 left boxV">
+            <p > <input class="search" v-model="search" placeholder="请输入搜索关键字"/></p>
+            <div class="col-1" style="position:relative;overflow:hidden;">
+                <ul class="tree" name="部门" id="tree">
+                </ul>
+            </div>
+        </div>
+        <div class="col-9">
+            <table id ="table"></table>
+        </div>
+    </div>
+</section>
+<section>
+<!--弹出框，新增部门-->
+    <!--:req="{sqlId:'select_dept'}"-->
+<section id = 'dialog' class ='boxV'>
+    <div class ='col-1'>
+        <div class="form">
+            <div>
+                <label>父级部门：</label>
+                <ck-tree-select
+                        tip="父级部门"
+                        placeholder="请选择父级部门"
+                        :data="treeData"
+                        :keys="{id:'dept_id',pid:'dept_pid',name:'dept_name'}"
+                        :id="dept.dept_pid"
+                        @async="async"
+                        @reftree="ckTree"
+                />
+            </div>
+            <div>
+                <label>部门名称：</label>
+                <p><input v-model="dept.dept_name"/></p>
+            </div>
+            <div>
+                <label>部门职能：</label>
+                <p><textarea v-model="dept.dept_desc"></textarea></p>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <button @click.stop="clear">重置</button>
+        <button @click.stop="save">保存</button>
+        <button @click.stop = "close">关闭</button>
+    </div>
+</section>
+
+</body>
+<script  src="/frame/lib/r.js"></script>
+<script  src="/frame/main.js"></script>
+<script  src="dept.js"></script>
+</html>

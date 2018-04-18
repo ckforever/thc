@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="mysql:mysql-connector-java:8.0.7-dmr" type="repository">
+    <properties maven-id="mysql:mysql-connector-java:8.0.7-dmr" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.7-dmr.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.7-dmr-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

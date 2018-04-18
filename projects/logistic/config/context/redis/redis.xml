@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+
+        ">
+
+    <context:property-placeholder  location="classpath:context/config.properties" local-override="true"/>
+
+
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.pool.maxTotal}" />
+        <property name="maxIdle" value="${redis.pool.maxIdle}" />
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+    </bean>
+
+    <!-- jedis服务器配置 -->
+    <bean id="jedisShardInfo" class="redis.clients.jedis.JedisShardInfo">
+        <constructor-arg index="0" value="${redis.url}" />
+        <constructor-arg index="1" value="${redis.port}" type="int" />
+    </bean>
+
+    <bean id="jedisConnFactory"       class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="${redis.url}" p:port="${redis.port}" p:password="${redis.pass}"  p:pool-config-ref="jedisPoolConfig"/>
+
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnFactory"/>
+        <property name="keySerializer" ref="keySerializer"/>
+        <property name="enableTransactionSupport" value="false"/>
+    </bean>
+
+    <!-- redis 序列化-->
+    <bean id="keySerializer"
+          class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+
+    <bean id="redisAtomicLong" class="org.springframework.data.redis.support.atomic.RedisAtomicLong">
+        <constructor-arg name="redisCounter" value="uniqueID"></constructor-arg>
+        <constructor-arg name="factory" ref="jedisConnFactory"></constructor-arg>
+    </bean>
+</beans>

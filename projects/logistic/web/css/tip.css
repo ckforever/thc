@@ -1,0 +1,96 @@
+@keyframes shows {
+    0%{
+        right:-500px;
+        background-color: rgba(215, 216, 196,  0.09);
+    }
+    30%{
+        background-color: rgba(215, 216, 196, 0.44);
+    }
+    100%{
+        right:130px;
+        background-color:rgba(215, 216, 196, 0.95);
+    }
+}
+@keyframes unShow {
+
+    0%{
+        right:130px;
+        background-color:rgba(215, 216, 196, 0.95);
+    }
+    50%{
+        background-color: rgba(215, 216, 196,  0.64);
+    }
+    100%{
+        right:-500px;
+        background-color: rgba(215, 216, 196,  0.09);
+    }
+}
+section.tip{
+    width: 400px;
+    height: 60px;
+    border-radius: 5px;
+    right:-500px;
+    box-shadow: 0 0 30px #080000;
+    background-color: #c3bba2d4;
+    position:relative;
+    margin-bottom: 10px;
+}
+section.tip:hover{
+    animation-play-state: paused;
+    box-shadow: 0 0 2px red;
+    cursor:pointer;
+}
+section.tip.alert{
+    animation: shows .4s forwards,unShow 1.2s 6s forwards;
+}
+section.tip>i{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    padding: 5px;
+    display: inline-block;
+    border-radius: 10px;
+    background: rgba(16, 46, 70, 0.82) url(images/tip/scs.png) no-repeat center;
+    background-size: 30px 30px;
+    box-shadow: 0 0 5px #1f1f1f;
+}
+section.tip>div{
+    height: 100%;
+    width: 255px;
+    display: inline-block;
+    border-radius:0 5px 5px 0;
+    overflow:hidden;
+
+}
+section.tip>div.opr{
+    width:85px;
+    text-align:center;
+}
+
+section.tip>div.opr button{
+    height: 29px;
+    width: 100%;
+    background: rgba(109, 97, 95, 0.75);
+    padding: 5px 0;
+    color: #06f106;
+}
+section.tip>div.opr button:last-child{
+    background: rgba(74, 27, 10, 0.75);
+    margin-top: 2px;
+    color: #ecbaba;
+}
+section.tip div>p:first-child{
+    margin-top:10px;
+    font-weight: bold;
+    color:black;
+}
+section.tip div>p:last-child{
+    color:#920f0f;
+    font-family: cursive;
+}
+section.message{
+    position: absolute;
+    right: 100px;
+    top: 80px;
+    height: 0;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <title>菜单</title>
+    <link rel="stylesheet" href="sysfnc.css"/>
+<body>
+<section class="boxV" id="container">
+    <div class="col-1 boxH">
+        <div class="col-3 left boxV">
+            <p > <input class="search" v-model="search" placeholder="请输入搜索关键字"/></p>
+            <div class="col-1" style="position:relative;overflow:hidden;">
+                <ul class="tree" name="菜单" id="tree">
+                </ul>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="form">
+                <div>
+                    <label>菜单名称：</label>
+                    <p><input v-model="fnc.sys_name"/></p>
+                </div>
+                <div>
+                    <label>父级名称：</label>
+                    <p><input v-model="fnc.pname"/></p>
+                </div>
+               <div>
+                   <label>菜单图标：</label>
+                   <div tabindex="-1" class="down" rel="section" tip="菜单图标">
+                       <input  id="icon_down" @click.self="choseIcon" readonly  placeholder="菜单图标"/>
+                       <section tabindex="-2" class="down_list" >
+                           <ul class="imgs">
+                               <li v-for="img in img.imgs" >
+                                   <img :src="'data:image/jpg;base64,'+img" @click.self="chose(img)"/>
+                               </li>
+                           </ul>
+                       </section>
+                   </div>
+
+                </div>
+                <div>
+                    <label>菜单地址：</label>
+                    <p><input v-model="fnc.sys_url" placeholder="请输入菜单地址"/></p>
+                </div>
+                <div>
+                    <div>
+                        <label>模块号：</label>
+                        <p><input v-model="fnc.module"/></p>
+                    </div>
+
+                </div>
+                <div>
+                    <div class="item">
+                        <label>启用：</label>
+                        <p>
+                            <input type="checkbox" v-model="fnc.sys_used">
+                            <i data-on="启用" data-off="禁用"></i>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <label>权限：</label>
+                        <p><input v-model="fnc.permission"></p>
+                    </div>
+                </div>
+                <div>
+                    <label>备注：</label>
+                    <p><textarea v-model="fnc.remark"></textarea></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <button @click.stop="clear">重置</button>
+        <button @click.stop="save">保存</button>
+        <button @click.stop = "remove">删除</button>
+    </div>
+</section>
+
+</body>
+    <script  src="/frame/lib/r.js"></script>
+    <script  src="/frame/main.js"></script>
+    <script  src="sysfnc.js"></script>
+</html>

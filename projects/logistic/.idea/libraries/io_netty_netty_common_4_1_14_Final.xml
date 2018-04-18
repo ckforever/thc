@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="io.netty:netty-common:4.1.14.Final" type="repository">
+    <properties maven-id="io.netty:netty-common:4.1.14.Final" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/netty-common-4.1.14.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/netty-common-4.1.14.Final-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/netty-common-4.1.14.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

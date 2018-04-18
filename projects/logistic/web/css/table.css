@@ -1,0 +1,192 @@
+.tableMask{
+    overflow: hidden;
+    margin:10px;
+    position:relative;
+    font-weight:300;
+}
+
+.table{
+    height:calc(100% - 125px);
+    overflow:auto;
+    margin-left:-1px;
+    border-bottom:1px solid rgba(226,223,223,0.22);
+    margin-right: -18px;
+    padding-right:18px;
+}
+.toolbar{
+    height:98px;
+}
+.table table{
+    width:calc(100% - 4px);
+    border-collapse: collapse;
+    margin-top:-22px;
+}
+.head *{
+    color:#ffffff;
+    font-weight:300;
+    font-size:16px;
+}
+.table .head{
+    position:sticky;
+    top:0px;
+    background:rgb(39, 58, 74);
+    z-index:1;
+}
+.table tbody,.table thead{
+    text-align:center;
+}
+
+.table tr{
+    height:45px;
+}
+.table tbody tr:hover,.table tbody tr.active{
+    background-color: rgba(15, 62, 106, 0.56);
+    cursor:pointer;
+}
+
+.table td,.table th{
+    box-shadow: 0 0 1px rgba(220,216,216,0.46);
+
+}
+.table td:last-child,.table th:last-child{
+    box-shadow: -1px 0 1px rgba(220,216,216,0.46);
+}
+.head thead th,.table tbody td{
+    position:relative;
+
+}
+.head thead th::before{
+    content:'';
+    position:absolute;
+    width:2px;
+    height:3px;
+    border-top: 1px solid #0dffe9;
+    border-left: 1px solid #0dffe9;
+    left:0px;
+    top:0px;
+}
+.head thead th::after{
+    content:'';
+    position:absolute;
+    width:2px;
+    height:3px;
+    border-top: 1px solid #0dffe9;
+    border-right: 1px solid #0dffe9;
+    top:0px;
+    right:0px;
+}
+.head thead th:first-child::before,.head thead th:last-child::after{
+    height:0px;
+    width:4px;
+    border-top:2px solid #0dffe9;
+}
+.table tbody td:first-child::after,.table tbody td:first-child::before,.table tbody td:last-child::after,.table tbody td:last-child::before{
+    content:'';
+    position:absolute;
+    width:4px;
+    height:0px;
+    border-top: 1px solid #0dffe9;
+    top:0px;
+    left:0px;
+}
+.table tbody td:last-child::after,.table tbody td:last-child::before{
+    left:auto;
+    right:0px;
+}
+.table tbody td:first-child::after,.table tbody td:last-child::after{
+    bottom:0px;
+    top:auto;
+}
+.table tbody tr:first-child>td:first-child::before,
+.table tbody tr:first-child>td:last-child::before,
+.table tbody tr:last-child>td:first-child::after,
+.table tbody tr:last-child>td:last-child::after
+{
+    border-top: 2px solid #0dffe9;
+}
+.pageNav{
+    padding:10px 0;
+    height:40px;
+}
+.pageNav ul{
+    text-align:right;
+    line-height:40px;
+}
+.pageNav li.active{
+    background-color:rgba(51, 91, 117, 0.85);
+}
+.pageNav li{
+    line-height:25px;
+    font-size:13px;
+    height:25px;
+    width:40px;
+    display:inline-block;
+    margin-right:7px;
+    cursor:pointer;
+    text-align:center;
+    border-radius:5px;
+    background:rgb(38, 56, 70) no-repeat center ;
+    background-size: 10px 10px;
+    vertical-align: middle;
+    color:#ffffff;
+}
+.pageNav li:hover{
+    background-color: rgb(57, 75, 90);
+}
+.pageNav li:nth-child(2){
+    background-image:url('images/table/prev.png');
+}
+.pageNav li:nth-last-child(2){
+    background-image:url('images/table/next.png');
+}
+.pageNav li:first-child{
+    background-image:url('images/table/frist.png');
+}
+.pageNav li:last-child{
+    background-image:url('images/table/last.png');
+}
+.tool-bar >div.searchDiv{
+    width:50%;
+    display:inline-block;
+}
+.tool-bar >div:first-child{
+    text-align:left !important;
+}
+.tool-bar >div:nth-child(2){
+    text-align:right;
+}
+
+.tool-bar >div.searchDiv p{
+    display:inline-block;
+    width:40%;
+    margin:10px;
+}
+.tool-bar input.search{
+    margin-top:5px;
+}
+.tool-bar >div.buttonDiv{
+    display:inline-block;
+    width:50%;
+    /*padding-right:10px;*/
+}
+.tool-bar >div.buttonDiv p{
+    display:inline-block;
+    margin:10px;
+}
+.tool-bar >div.buttonDiv button{
+    height: 25px;
+    border-radius: 5px;
+    background:url('images/table/custom.png') #13293e  10px 50% no-repeat;
+    background-size: 21px 18px;
+    text-align: right;
+    padding: 0 15px 0 38px;
+}
+.tool-bar >div.buttonDiv button.add{
+    background-image: url(images/table/add.png);
+}
+.tool-bar >div.buttonDiv button.delete{
+    background-image:url(images/table/delete.png);
+}
+.tool-bar >div.buttonDiv button.edit{
+    background-image:url(images/table/edit.png);
+}

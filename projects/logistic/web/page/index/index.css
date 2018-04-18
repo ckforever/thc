@@ -1,0 +1,229 @@
+@import "../../css/share.css";
+@import "../../css/tip.css";
+
+@keyframes  menu{
+    0%{
+        transform: scale(0,0);
+    }
+    100%{
+        transform: scale(1,1);
+    }
+}
+
+.top{
+    background:#062135;
+    height:60px;
+    line-height:60px;
+}
+.top .logo{
+    margin-left:1%;
+    font-size:x-large;
+    background-image: url(../../css/images/logo.png);
+    background-repeat:no-repeat;
+    padding-left:45px;
+}
+.top .system{
+    float: right;
+    width: 50%;
+    height: 100%;
+
+}
+.top .user{
+    background-image: url(../../css/images/user.png);
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    float: right;
+    padding-left: 35px;
+    margin-right: 15px;
+}
+
+.top .user>label{
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+.top .user>label:hover{
+    color: green;
+    font-size: 20px;
+
+}
+.left_menu{
+    width:43px;
+}
+
+.left_menu li{
+    margin-top: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    cursor:pointer;
+    position:relative;
+    border-radius:5px;
+}
+.left_menu li:last-child{
+    position: absolute;
+    width: 43px;
+    height: 33px;
+    bottom: 65px;
+    background-image: url(../../css/images/menu.png);
+    cursor:pointer;
+}
+
+.left_menu li.notice{
+    background-image: url(../../css/images/notice.png);
+}
+.left_menu li>div{
+    transform: scale(0,0);
+    opacity:0;
+    z-index: 1000;
+    border-radius: 8px;
+    position: absolute;
+    left: 58px;
+    background: rgba(5, 79, 138, 0.59);
+    top: -16%;
+    min-width: 340px;
+    min-height: 200px;
+    text-align: center;
+    box-shadow: 0 0 5px rgb(63,137,197) inset;
+    transition:all 0.3s 0.1s;
+}
+.left_menu li >span{
+    left: 50px;
+    z-index: 1000;
+    position: absolute;
+    width: 100px;
+    background: rgba(247, 243, 243, 0.76);
+    border-radius: 5px;
+    padding: 1px 10px;
+    font-size: 15px;
+    font-family: cursive;
+    top: 50%;
+    margin-top: -12px;
+    text-align: center;
+    color: rgb(02,02,02);
+    box-shadow: 0 0 5px #99b0b5;
+    transform: scale(0,0);
+    opacity:0;
+    transition:all 0.1s;
+}
+.left_menu ul{
+    padding-top: 20px;
+    margin-bottom: 10px;
+    background: rgb(29, 49, 66);
+}
+.left_menu li:hover:not(:focus)>span,.left_menu li:focus>div{
+    transform: scale(1,1);
+    opacity:1;
+}
+.left_menu li:last-child>div{
+    bottom: -15px;
+    top: initial;
+}
+.left_menu li:last-child>div::before{
+    bottom: 10px;
+    top: inherit;
+}
+.left_menu li >div::before{
+    content: '';
+    width: 0;
+    left: -15px;
+    top: 10px;
+    margin-right: 20px;
+    position: absolute;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-right: 15px solid rgb(13,65,107);
+}
+.left_menu p{
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size:14px;
+    cursor:pointer;
+    float:left;
+    min-width: 80px;
+    height:60px;
+}
+.left_menu p> span{
+    display:inherit;
+    margin-top:10px;
+}
+.left_menu p:hover{
+    box-shadow: 0 0 20px rgb(218,210,210) inset;
+}
+.main{
+    margin:20px 0;
+    border-bottom: 1px solid rgb(92, 114, 139);
+}
+.main_container{
+
+}
+.main_top{
+    height:38px;
+    background: #5c728b;
+    overflow:auto;
+    margin: 0 10px;
+}
+.main_top li{
+    height: 34px;
+    margin: 4px 10px 0 0;
+    line-height: 35px;
+    width: 200px;
+    text-align: center;
+    font-family: cursive;
+    float: left;
+    list-style: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor:pointer;
+    position:relative;
+    background-repeat:no-repeat;
+    background-position: 5% 50%;
+    background-size:21px 21px;
+    background-color: #003056;
+
+}
+.main_top li:hover,.main_top li.active{
+    background-color: #122738;
+    color: rgb(8, 243, 199);
+}
+.main_top li>i{
+    position:absolute;
+    height:18px;
+    width:18px;
+    display:inline-block;
+    right:2px;
+    top:3px;
+}
+.main_top li:hover>i{
+    background:url(../../css/images/background/remove.png);
+    animation:rotate .6s;
+}
+
+.main_center{
+    overflow: hidden;
+    position:relative;
+    margin:10px;
+    background:url(../../css/images/background/bg.png)  center no-repeat;
+    background-size:100% 100%;
+}
+.main_center  ul{
+    background: rgba(4, 31, 53, 0.82);
+}
+.main_center  ul,.main_center  li{
+    width:100%;
+    height:100%;
+}
+.main_center  li{
+    display: none;
+}
+.main_center  li.active{
+    display: block;
+}
+.main_center li > iframe{
+    border:none;
+    width:100%;
+    height:100%;
+    overflow: auto;
+}

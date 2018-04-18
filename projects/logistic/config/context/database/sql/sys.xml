@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sys">
+    <insert id="insert_fnc" keyProperty="sys_id"  statementType="PREPARED" parameterType="map"  >
+
+        INSERT INTO sys_menu(
+           sys_id                         ,
+           sys_pid                        ,
+           sys_name                       ,
+           sys_icon                       ,
+           sys_used                       ,
+           sys_url                        ,
+           sys_remark
+        )
+        VALUES
+          (
+           #{sys_id}                       ,
+           #{sys_pid}                        ,
+           #{sys_name}                       ,
+           #{sys_icon}                      ,
+           #{sys_used}                       ,
+           #{sys_url}                        ,
+           #{sys_remark}
+          )
+    </insert>
+
+    <select id="get_menus"  parameterType="map" resultType="map">
+        SELECT
+
+          *
+        FROM
+          sys_menu
+
+    </select>
+
+    <delete id="remove_sys_men" parameterType="list">
+        DELETE FROM sys_menu
+        WHERE sys_id  in
+
+        <foreach collection="ids"  item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="update_sys_menu" parameterType="map">
+
+        UPDATE
+           sys_menu
+        SET
+           sys_pid  =#{sys_pid}                      ,
+           sys_name =#{sys_name}                  ,
+           sys_icon =#{sys_icon}                      ,
+           sys_used =#{sys_used}                  ,
+           sys_url  =#{sys_url}                  ,
+           sys_remark =#{sys_remark}
+        WHERE
+           sys_id   =#{sys_id}
+    </update>
+
+
+    <select id="get_user_menus"  parameterType="map" resultType="map">
+        SELECT
+
+           sys_id    id                     ,
+           sys_pid   pid                    ,
+           sys_name  name                     ,
+           sys_icon  icon                    ,
+           sys_used  used                    ,
+           sys_url   src                    ,
+           sys_remark remark
+        FROM
+        sys_menu
+
+    </select>
+
+    <!--常量管理-->
+    <select id="select_const_by_page" parameterType="map" resultType="map">
+      SELECT
+            const_id ,
+            const_name ,
+            b.const_group_id,
+            const_group_name,
+            const_value,
+            date_format(const_crt_time, '%Y-%m-%d %h:%m:%s') const_crt_time
+      FROM
+        sys_const b
+      LEFT JOIN sys_const_group  a ON a.const_group_id = b.const_group_id
+      ORDER BY b.const_id DESC
+    </select>
+    <insert id="insert_conset_by_page" keyProperty="const_id" parameterType="map" >
+      INSERT INTO sys_const
+      (
+            const_id ,
+            const_name ,
+            const_group_id ,
+            const_value ,
+            const_crt_time,
+            const_crt_user
+      )
+      values(
+            #{const_id} ,
+            #{const_name} ,
+            #{const_group_id} ,
+            #{const_value},
+            SYSDATE(),
+            #{const_crt_user}
+      )
+
+    </insert>
+    <update id="update_const" parameterType="map">
+      UPDATE sys_const
+      SET
+
+            const_name =#{const_name},
+            const_group_id=#{const_group_id},
+            const_value=#{const_value}
+      WHERE
+            const_id =#{const_id}
+
+    </update>
+    <delete id="delete_const" parameterType="map">
+            DELETE FROM  sys_const
+
+            where const_id = #{const_id}
+
+    </delete>
+    <select id="select_cost_group" parameterType="map" resultType="map">
+      SELECT
+        const_group_id,
+        const_group_name,
+        const_group_label,
+        const_group_desc
+      FROM sys_const_group
+
+    </select>
+
+    <insert id="add_const_group" keyProperty="const_group_id" parameterType="map">
+        INSERT into sys_const_group
+        (const_group_id, const_group_name, const_group_label,const_group_desc) VALUES
+        (#{const_group_id},#{const_group_name},#{const_group_label},#{const_group_desc})
+    </insert>
+
+    <update id="update_const_group">
+        UPDATE sys_const_group
+        SET
+          const_group_name =#{const_group_name},
+          const_group_label=#{const_group_label},
+          const_group_desc=#{const_group_desc}
+        WHERE const_group_id=#{const_group_id}
+    </update>
+
+    <delete id="delete_const_group">
+        DELETE
+        FROM sys_const_group
+
+        WHERE
+          const_group_id =#{const_group_id}
+    </delete>
+    <!--部门sql-->
+    <select id="select_dept" resultType="map" parameterType="map">
+        SELECT
+        dept_id,
+        dept_name ,
+        dept_pid ,
+        (select dept_name from sys_department where dept_id = dept_pid)dept_pname,
+        dept_desc ,
+        date_format(dept_crte_time, '%Y-%m-%d %h:%m:%s')dept_crte_time ,
+        dept_crte_id ,
+        date_format(dept_upt_time, '%Y-%m-%d %h:%m:%s')dept_upt_time ,
+        dept_upt_id
+        FROM sys_department
+        <where>
+            <if test="dept_id !=null">
+                dept_pid =#{dept_id}
+            </if>
+            <if test="dept_name !=null">
+                AND dept_name LIKE concat('%',#{dept_name},'%')
+            </if>
+            <if test="dept_desc !=null">
+                AND dept_desc LIKE concat('%',#{dept_desc},'%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="add_dept" keyProperty="dept_id" parameterType="map">
+        INSERT INTO sys_department
+        (
+        dept_id,
+        dept_name ,
+        dept_pid ,
+        dept_desc ,
+        dept_crte_time ,
+        dept_crte_id
+        )values(
+        #{dept_id},
+        #{dept_name},
+        #{dept_pid},
+        #{dept_desc},
+        SYSDATE(),
+        #{dept_crte_id}
+        )
+    </insert>
+    <update id="update_dept" parameterType="map">
+
+        UPDATE sys_department
+        SET
+
+        dept_name =#{dept_name},
+        dept_pid  =#{dept_pid},
+        dept_desc  =#{dept_desc},
+        dept_upt_time =SYSDATE() ,
+        dept_upt_id =#{dept_upt_id}
+        WHERE
+        dept_id =#{dept_id}
+    </update>
+    <delete id="delete_dept" parameterType="map">
+        DELETE FROM
+          sys_department
+        WHERE
+          dept_id =#{dept_id}
+    </delete>
+
+    <select id="get_const_by_group" resultType="map">
+
+        SELECT
+            const_id   ,
+            const_name  id,
+            const_value name
+        FROM
+            sys_const
+        RIGHT JOIN sys_const_group
+        ON sys_const.const_group_id=sys_const_group.const_group_id
+        <where>
+            <if test="const_group_label !=null">
+                const_group_label = #{const_group_label}
+            </if>
+        </where>
+    </select>
+
+    <!--角色管理-->
+    
+    <select id="get_uer_role" resultType="map">
+        SELECT
+          role_id id,
+          role_type pid,
+          role_name name,
+          role_id ,
+          role_type ,
+          role_name ,
+          role_permission_level,
+          role_desc
+        FROM
+          sys_role
+        UNION ALL
+        SELECT
+          const_name id,
+          -1         pid,
+          const_value name,
+          null role_id,
+          null role_type,
+          null role_name,
+          null role_permission_level,
+          null role_desc
+        FROM
+          sys_const
+        INNER JOIN sys_const_group
+        ON sys_const.const_group_id= sys_const_group.const_group_id
+        WHERE
+        const_group_label ='role_type'
+
+    </select>
+    
+    <insert id="add_role" parameterType="map"  keyProperty="role_id">
+
+
+        INSERT INTO sys_role
+        (
+            role_id,
+            role_name,
+            role_type,
+            role_permission_level,
+            role_desc,
+            role_used,
+            role_crte_time,
+            role_crte_id
+        )
+        VALUES (
+            #{role_id},
+            #{role_name},
+            #{role_type},
+            #{role_permission_level},
+            #{role_desc},
+            #{role_used},
+            SYSDATE(),
+            #{role_crte_id}
+        )
+    </insert>
+    <update id="edit_role" parameterType="map">
+        UPDATE
+          sys_role
+        SET
+            role_name =#{role_name},
+            role_type =#{role_type},
+            role_permission_level =#{role_permission_level},
+            role_desc=#{role_desc},
+            role_used =#{role_used},
+            role_upt_time = sysdate()
+        WHERE
+             role_id =#{role_id}
+
+    </update>
+    <insert id="add_role_mens" parameterType="map">
+        INSERT INTO sys_role_menu
+        (
+            srm_role_id,
+            srm_menu_id
+        )
+        VALUES (
+            #{srm_role_id},
+            #{srm_menu_id}
+        )
+    </insert>
+    <delete id="remove_role" parameterType="map">
+        DELETE FROM
+          sys_role
+        WHERE
+          role_id =#{role_id}
+    </delete>
+    <delete id="romove_role_men" parameterType="map">
+        DELETE FROM
+          sys_role_menu
+        WHERE
+          srm_role_id =#{srm_role_id}
+    </delete>
+</mapper>

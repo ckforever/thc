@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+
+        ">
+
+    <context:property-placeholder  location="classpath:context/config.properties" local-override="true"/>
+
+
+
+    <bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.cj.jdbc.Driver</value>
+        </property>
+        <property name="url">
+            <value>
+                jdbc:mysql://192.168.3.17:3306/cmm?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false
+            </value>
+        </property>
+        <property name="username">
+            <value>cmm</value>
+        </property>
+        <property name="password">
+            <value>1</value>
+        </property>
+    </bean>
+    <!-- 在使用mybatis时 spring使用sqlsessionFactoryBean 来管理mybatis的sqlsessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- mybatis配置文件路径 -->
+        <property name="configLocation" value="classpath:context/database/config/mybatis.xml" />
+        <property name="mapperLocations" value="classpath:context/database/sql/*.xml" />
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0">
+            <ref bean="sqlSessionFactory"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+             <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>

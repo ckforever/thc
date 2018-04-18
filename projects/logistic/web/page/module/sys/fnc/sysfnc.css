@@ -1,0 +1,16 @@
+@import url('../../../../css/share.css');
+
+ul.imgs li{
+    margin:10px;
+    cursor:pointer;
+    display:inline-block;
+}
+
+ul.imgs img:hover{
+    transform: scale(1.05,1.05);
+    box-shadow: 0 0 10px #ffe2e2;
+}
+#icon_down{
+    background-repeat: no-repeat;
+    background-position: 0;
+}

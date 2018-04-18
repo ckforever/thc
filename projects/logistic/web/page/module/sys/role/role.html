@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>角色</title>
+<link rel="stylesheet" href="role.css"/>
+<body>
+<section class="boxV" id="container">
+    <div class="col-1 boxH">
+        <div class="col-3 left boxV">
+            <p > <input class="search"  placeholder="请输入搜索关键字"/></p>
+            <div class="col-1" style="position:relative;overflow:hidden;">
+                <ul class="tree" name="角色" id="tree">
+                </ul>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="form">
+                <div>
+                    <label>角色名称：</label>
+                    <p><input v-model="role.role_name"/></p>
+                </div>
+                <div>
+                    <label>角色分类：</label>
+                    <ck-select
+                            tip="分类"
+                            placeholder="请选择分类"
+                            :req="{sqlId:'get_const_by_group',data:{const_group_label:'role_type'}}"
+                            :id="role.role_type"
+                            @async="async1"
+                    />
+                </div>
+
+                <div>
+                    <label>菜单权限：</label>
+                    <div class="custom"  style="height:350px;overflow: hidden">
+                        <ul id="fnc_tree" class="tree" name="系统菜单" >
+
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <label>数据权限：</label>
+                    <ck-select
+                            tip="数据权限"
+                            placeholder="数据权限"
+                            :req="{sqlId:'get_const_by_group',data:{const_group_label:'data_permission'}}"
+                            :id="role.role_permission_level"
+                            @async="async"
+                    />
+                </div>
+                <div>
+                    <label>是否启用：</label>
+                    <p>
+                        <input type="checkbox" v-model="role.role_used">
+                        <i data-on="启用" data-off="禁用"></i>
+                    </p>
+                </div>
+                <div>
+                    <label>备注：</label>
+                    <p><textarea v-model="role.role_desc"></textarea></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <button @click.stop="clear">重置</button>
+        <button @click.stop="save">保存</button>
+        <button @click.stop = "remove">删除</button>
+    </div>
+</section>
+
+</body>
+<script  src="/frame/lib/r.js"></script>
+<script  src="/frame/main.js"></script>
+<script  src="role.js"></script>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>常量</title>
+<link rel="stylesheet" href="const.css"/>
+<body>
+<section class="boxV" id="container" >
+    <div class="col-1">
+        <table id ="table"></table>
+    </div>
+</section>
+<section id="table_group_dialog" class ='boxV'>
+    <div class="col-1">
+        <table id ="table_group"></table>
+    </div>
+</section>
+<section id="dialogcon">
+    <section id = 'dialogg' class ='boxV'>
+        <div class ='col-1'>
+            <div class="form">
+                <div>
+                    <label>常量组名：</label>
+                    <p><input v-model="sysGroup.const_group_name"/></p>
+                </div>
+                <div>
+                    <label>常量组标识：</label>
+                    <p><input v-model="sysGroup.const_group_label"/></p>
+                </div>
+                <div>
+                    <label>常量用途：</label>
+                    <p><input v-model="sysGroup.const_group_desc"/></p>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <button @click.stop="clearGroup()">重置</button>
+            <button @click.stop="saveGroup()">保存</button>
+            <button @click.stop = "closeGroup()">关闭</button>
+        </div>
+
+    </section>
+    <section id = 'dialog' class ='boxV'>
+        <div class ='col-1'>
+            <div class="form">
+                <div>
+                    <label>常量组：</label>
+                    <ck-select
+                        tip="常量组"
+                        placeholder="请选择常量组"
+                        :req="{sqlId:'select_cost_group'}"
+                        :keys="{id:'const_group_id',name:'const_group_name'}"
+                        :id="sysConst.const_group_id"
+                        @async="async"
+                    />
+                </div>
+                <div>
+                    <label>常量名：</label>
+                    <p><input v-model="sysConst.const_name"/></p>
+                </div>
+                <div>
+                    <label>转换值：</label>
+                    <p><input v-model="sysConst.const_value"/></p>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <button @click.stop="clear">重置</button>
+            <button @click.stop="save">保存</button>
+            <button @click.stop = "close">关闭</button>
+        </div>
+    </section>
+</section>
+</body>
+<script  src="/frame/lib/r.js"></script>
+<script  src="/frame/main.js"></script>
+<script  src="const.js"></script>
+</html>

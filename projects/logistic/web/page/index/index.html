@@ -1,0 +1,57 @@
+<!DOCTYP html>
+<html>
+    <title>首页</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="page/index/index.css"/>
+<body >
+    <section id="container" class="boxV" style="background-color: rgba(3, 21, 35, 0.98);">
+        <!--菜单-->
+        <section  class="top" >
+            <span class="logo">执承物流有限公司</span>
+            <div class="system">
+                <span class="user">欢迎你 <label>{{user.name}}</label></span>
+            </div>
+        </section>
+
+        <section class="boxH main  col-12">
+            <!--左侧菜单栏-->
+            <section class="boxV left_menu">
+                <ul class="col-1">
+                    <li v-for="item in user.menus"  tabindex="-3" :style="'background-image: url(data:image/jpg;base64,'+item.icon+')'">
+                        <span>{{item.name}}</span>
+                        <div tabindex="-3">
+                            <p v-for="c in item.child"  @click="open(c,$event)" >
+                                <img :src="'data:image/jpg;base64,'+c.icon">
+                                <span>{{c.name}}</span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <!--中间主区域-->
+            <section class="boxV main_container col-9">
+                <!--标题栏-->
+                <nav class="main_top" >
+                    <ul id="nav_bar">
+                        <!--<li ck-for="c in modules" ck-id="'nav_'+c.id" ck-class="{active:c.active}" ck-click.stop="open(c)">-->
+                            <!--<span>${c.name}</span><i ck-click.stop="remove(c)"></i>-->
+                        <!--</li>-->
+                    </ul>
+                </nav>
+                <!--容器栏-->
+                <section class="main_center col-9">
+                    <ul id="main_sec">
+                        <!--<li ck-for="c in modules" ck-class="{active:c.active}">-->
+                              <!--<iframe ck-src="c.src" ck-id="'cfr_'+c.id"> </iframe>-->
+                        <!--</li>-->
+                    </ul>
+                </section>
+            </section>
+
+        </section>
+    </section>
+</body>
+<script  src="/frame/lib/r.js"></script>
+<script  src="/frame/main.js"></script>
+<script  src="page/index/index.js"></script>
+</html>
